@@ -41,7 +41,7 @@ public class MaquEquiRepositoryImpl implements MaquEquiRepository {
 
 	@Override
 	public MaquEqui atualizar(MaquEqui maquEqui) {
-		return this.atualizar(maquEqui);
+		return this.incluir(maquEqui);
 	}
 
 	@Override
