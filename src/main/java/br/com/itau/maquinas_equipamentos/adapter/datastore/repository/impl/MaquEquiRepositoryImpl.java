@@ -29,6 +29,22 @@ public class MaquEquiRepositoryImpl implements MaquEquiRepository {
 	}
 
 	@Override
+	public Optional<MaquEqui> consultarPorId(String idBem) {
+		var maquEquiPk = maquEquiMapper.toEntityPk(idBem);
+		var maquEquiEntityOptional = maquEquiJpaRepository.findById(maquEquiPk);
+		if (maquEquiEntityOptional.isEmpty()) {
+			return Optional.empty();
+		}
+		var maquEqui = maquEquiMapper.fromMaquEquiEntity(maquEquiEntityOptional.get());
+		return Optional.of(maquEqui);
+	}
+
+	@Override
+	public MaquEqui atualizar(MaquEqui maquEqui) {
+		return this.atualizar(maquEqui);
+	}
+
+	@Override
 	public void deletar(String idBem) {
 		var maquEquiPk = maquEquiMapper.toEntityPk(idBem);
 		{
@@ -37,24 +53,7 @@ public class MaquEquiRepositoryImpl implements MaquEquiRepository {
 	}
 
 	@Override
-	public Optional<MaquEqui> consultarPorId(String idBem) {
-		var bemPk = maquEquiMapper.toEntityPk(idBem);
-		var bemEntityOptional = maquEquiJpaRepository.findById(bemPk);
-		if (bemEntityOptional.isEmpty()) {
-			return Optional.empty();
-		}
-		var bem = maquEquiMapper.fromMaquEquiEntity(bemEntityOptional.get());
-		return Optional.of(bem);
-	}
-
-	@Override
 	public Long verificarSeExiste(String idBem) {
 		return maquEquiJpaRepository.countByPk(maquEquiMapper.toEntityPk(idBem));
-	}
-
-	@Override
-	public MaquEqui atualizar(MaquEqui maquEqui) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
