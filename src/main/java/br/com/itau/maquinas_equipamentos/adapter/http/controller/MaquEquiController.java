@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.itau.maquinas_equipamentos.domain.exception.BemNaoEncontradoException;
+import br.com.itau.maquinas_equipamentos.domain.exception.MaquEquiNaoEncontradoException;
 import br.com.itau.maquinas_equipamentos.domain.exception.NegocioException;
 import br.com.itau.maquinas_equipamentos.domain.usecase.DeletarBemMaqu;
-import br.com.itau.maquinas_equipamentos.domain.usecase.IncluirBemMaqu;
+import br.com.itau.maquinas_equipamentos.domain.usecase.IncluirMaquEqui;
 import br.com.itau.maquinas_equipamentos.port.dto.MaquEquiDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class MaquEquiController {
 
-	private final IncluirBemMaqu incluirBemMaqu;
+	private final IncluirMaquEqui incluirMaquEqui;
 	private final DeletarBemMaqu deletarBemMaqu;
 	public static final String PATH_MAQUEQUI = "bens/{id_bem}/maquinas-equipamentos";
 	public static final String ID_BEM = "id_bem";
@@ -40,9 +40,9 @@ public class MaquEquiController {
 	public ResponseEntity<MaquEquiDto> incluirBem(@PathVariable(name = ID_BEM) UUID idBem,
 			@Valid @RequestBody MaquEquiDto maquEquiDto) {
 		maquEquiDto.setIdBem(idBem.toString());
-		var bem = incluirBemMaqu.execute(maquEquiDto);
+		var bem = incluirMaquEqui.execute(maquEquiDto);
 		log.info("MaquEqu_Salvo={}", bem.toString());
-		return ResponseEntity.status(HttpStatus.CREATED).body(incluirBemMaqu.execute(bem));
+		return ResponseEntity.status(HttpStatus.CREATED).body(incluirMaquEqui.execute(bem));
 	}
 
 	@DeleteMapping(PATH_MAQUEQUI)
@@ -50,8 +50,8 @@ public class MaquEquiController {
 	public void deletarBem(@PathVariable(name = ID_BEM) UUID idBem) throws NegocioException {
 		try {
 			deletarBemMaqu.execute(idBem.toString());
-		} catch (BemNaoEncontradoException ex) {
+		} catch (MaquEquiNaoEncontradoException ex) {
 			throw new NegocioException("Não foi encontrado");
+		}
 	}
-}
 }

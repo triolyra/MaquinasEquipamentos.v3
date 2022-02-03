@@ -10,23 +10,23 @@ import br.com.itau.maquinas_equipamentos.port.mapper.MaquEquiMapper;
 import br.com.itau.maquinas_equipamentos.port.repository.MaquEquiRepository;
 
 @Named
-public class IncluirBemMaqu {
+public class IncluirMaquEqui {
 
 	private final MaquEquiRepository maquEquiRepository;
 	private final MaquEquiMapper maquEquiMapper = MapperFactory.newInstance(MaquEquiMapper.class);
 
 	@Inject
-	public IncluirBemMaqu(MaquEquiRepository maquEquiRepository) {
+	public IncluirMaquEqui(MaquEquiRepository maquEquiRepository) {
 		this.maquEquiRepository = maquEquiRepository;
 	}
 
 	public MaquEquiDto execute(MaquEquiDto maquEquiDto) {
 		if (maquEquiDto == null)
-			throw new NegocioException("O bem DTO não pode ser nulo");
+			throw new NegocioException("A DTO de bem máquina/equipamento não pode ser nulo");
 
-		var bem = maquEquiMapper.fromMaquEquiDto(maquEquiDto);
-		var bemSalvo = maquEquiRepository.incluir(bem);
-		var bemSalvoDto = maquEquiMapper.toMaquEquiDto(bemSalvo);
-		return bemSalvoDto;
+		var maquEqui = maquEquiMapper.fromMaquEquiDto(maquEquiDto);
+		var maquEquiSalvo = maquEquiRepository.incluir(maquEqui);
+		var maquEquiSalvoDto = maquEquiMapper.toMaquEquiDto(maquEquiSalvo);
+		return maquEquiSalvoDto;
 	}
 }

@@ -17,7 +17,7 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
-public class PessoaResponsavelEntityPK implements Serializable {
+public class PessoaResponsavelEntityPK extends MaquEquiEntityPK implements Serializable {
 
 	private static final long serialVersionUID = -9033685707900808404L;
 

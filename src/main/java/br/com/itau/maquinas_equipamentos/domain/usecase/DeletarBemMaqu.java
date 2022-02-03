@@ -3,7 +3,7 @@ package br.com.itau.maquinas_equipamentos.domain.usecase;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.itau.maquinas_equipamentos.domain.exception.BemNaoEncontradoException;
+import br.com.itau.maquinas_equipamentos.domain.exception.MaquEquiNaoEncontradoException;
 import br.com.itau.maquinas_equipamentos.port.repository.MaquEquiRepository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,7 +28,7 @@ public class DeletarBemMaqu {
 		var bemOptional = maquEquiRepository.consultarPorId(idBem);
 		if (bemOptional.isEmpty()) {
 			log.info("Maquina_Equipamento_Nao_Encontrado=idBem{}", idBem);
-			throw new BemNaoEncontradoException(idBem);
+			throw new MaquEquiNaoEncontradoException(idBem);
 		}
 	}
 }

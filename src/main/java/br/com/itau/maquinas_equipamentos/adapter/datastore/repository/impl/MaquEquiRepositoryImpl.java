@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import br.com.itau.maquinas_equipamentos.adapter.datastore.repository.MaquEquiJpaRepository;
 import br.com.itau.maquinas_equipamentos.domain.exception.NegocioException;
-import br.com.itau.maquinas_equipamentos.domain.model.Bem;
+import br.com.itau.maquinas_equipamentos.domain.model.MaquEqui;
 import br.com.itau.maquinas_equipamentos.port.mapper.MapperFactory;
 import br.com.itau.maquinas_equipamentos.port.mapper.MaquEquiMapper;
 import br.com.itau.maquinas_equipamentos.port.repository.MaquEquiRepository;
@@ -20,12 +20,11 @@ public class MaquEquiRepositoryImpl implements MaquEquiRepository {
 
 	private final MaquEquiMapper maquEquiMapper = MapperFactory.newInstance(MaquEquiMapper.class);
 
-	
 	@Override
-	public Bem incluir(Bem bem) {
-		if (bem == null)
-			throw new NegocioException("O bem não pode ser nulo");
-		var maquEquiEntity = maquEquiJpaRepository.save(maquEquiMapper.toMaquEquiEntity(bem));
+	public MaquEqui incluir(MaquEqui maquEqui) {
+		if (maquEqui == null)
+			throw new NegocioException("O bem máquina/equipamento não pode ser nulo");
+		var maquEquiEntity = maquEquiJpaRepository.save(maquEquiMapper.toMaquEquiEntity(maquEqui));
 		return maquEquiMapper.fromMaquEquiEntity(maquEquiEntity);
 	}
 
@@ -38,7 +37,7 @@ public class MaquEquiRepositoryImpl implements MaquEquiRepository {
 	}
 
 	@Override
-	public Optional<Bem> consultarPorId(String idBem) {
+	public Optional<MaquEqui> consultarPorId(String idBem) {
 		var bemPk = maquEquiMapper.toEntityPk(idBem);
 		var bemEntityOptional = maquEquiJpaRepository.findById(bemPk);
 		if (bemEntityOptional.isEmpty()) {
@@ -54,7 +53,7 @@ public class MaquEquiRepositoryImpl implements MaquEquiRepository {
 	}
 
 	@Override
-	public Bem atualizar(Bem bem) {
+	public MaquEqui atualizar(MaquEqui maquEqui) {
 		// TODO Auto-generated method stub
 		return null;
 	}

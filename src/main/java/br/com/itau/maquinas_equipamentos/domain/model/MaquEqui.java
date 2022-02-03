@@ -9,42 +9,42 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class Bem {
+public class MaquEqui {
 
-	public Bem(String idBem, int idTipoBem, String idUsuarioResponsavel, LocalDate dataDoCadastro,
-			LocalDate dataDaAlteracao, char indicadorValorizacaoManual, double valorAtualDoBem, String descricaoCompl,
-			String idTipoMaquEqui, String numeroDeSerie, double numeroNotaFiscal, int numeroSequencial, String cep,
-			String logradouro, String complemento, LocalDate dataFimApolice, LocalDate dataInicioApolice,
-			LocalDate dataRenovacaoApolice, char indicadorBeneficiarioSeguradora, String nomeSeguradora,
-			double numeroApoliceSeguro, double numeroCpfOuCnpjSeguradora) {
+	public MaquEqui(int idTipoBem, String idBem, LocalDate dataDoCadastro, LocalDate dataDaAlteracao,
+			String idUsuarioResponsavel, char indicadorValorizacaoManual, double valorAtualDoBem, String idTipoMaquEqui,
+			int numeroSequencial, String numeroDeSerie, double numeroNotaFiscal, String descricaoCompl, String cep,
+			String logradouro, String complemento, String nomeSeguradora, double numeroCpfOuCnpjSeguradora,
+			double numeroApoliceSeguro, char indicadorBeneficiarioSeguradora, LocalDate dataInicioApolice,
+			LocalDate dataFimApolice, LocalDate dataRenovacaoApolice) {
 		if (!this.validaUUIDs(idBem))
 			throw new NegocioException("Id bem inválido");
-		this.idBem = idBem;
 		this.idTipoBem = idTipoBem;
-		this.idUsuarioResponsavel = idUsuarioResponsavel;
-		this.dataDaAlteracao = dataDaAlteracao;
+		this.idBem = idBem;
 		this.dataDoCadastro = dataDoCadastro;
+		this.dataDaAlteracao = dataDaAlteracao;
+		this.idUsuarioResponsavel = idUsuarioResponsavel;
 		this.indicadorValorizacaoManual = indicadorValorizacaoManual;
 		this.valorAtualDoBem = valorAtualDoBem;
-		this.descricaoCompl = descricaoCompl;
 		this.idTipoMaquEqui = idTipoMaquEqui;
+		this.numeroSequencial = numeroSequencial;
 		this.numeroDeSerie = numeroDeSerie;
 		this.numeroNotaFiscal = numeroNotaFiscal;
-		this.numeroSequencial = numeroSequencial;
+		this.descricaoCompl = descricaoCompl;
 		this.cep = cep;
 		this.logradouro = logradouro;
-		this.dataFimApolice = dataFimApolice;
-		this.dataInicioApolice = dataInicioApolice;
-		this.dataRenovacaoApolice = dataRenovacaoApolice;
-		this.indicadorBeneficiarioSeguradora = indicadorBeneficiarioSeguradora;
+		this.complemento = complemento;
 		this.nomeSeguradora = nomeSeguradora;
-		this.numeroApoliceSeguro = numeroApoliceSeguro;
 		this.numeroCpfOuCnpjSeguradora = numeroCpfOuCnpjSeguradora;
+		this.numeroApoliceSeguro = numeroApoliceSeguro;
+		this.indicadorBeneficiarioSeguradora = indicadorBeneficiarioSeguradora;
+		this.dataInicioApolice = dataInicioApolice;
+		this.dataFimApolice = dataFimApolice;
+		this.dataRenovacaoApolice = dataRenovacaoApolice;
 	}
-	
+
 	private int idTipoBem;
 	private String idBem;
-	private String idTipoMaquEqui;
 
 	private LocalDate dataDoCadastro;
 	private LocalDate dataDaAlteracao;
@@ -52,6 +52,7 @@ public class Bem {
 	private char indicadorValorizacaoManual;
 	private double valorAtualDoBem;
 
+	private String idTipoMaquEqui;
 	private int numeroSequencial;
 	private String numeroDeSerie;
 	private double numeroNotaFiscal;
