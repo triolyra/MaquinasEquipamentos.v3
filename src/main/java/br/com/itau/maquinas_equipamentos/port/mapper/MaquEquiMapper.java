@@ -11,13 +11,11 @@ import br.com.itau.maquinas_equipamentos.port.dto.MaquEquiDto;
 @Mapper
 public interface MaquEquiMapper {
 
-	@Mapping(target = "idTipoBem", ignore = true)
 	MaquEquiEntityPK toEntityPk(String idBem);
 
 	MaquEquiDto toMaquEquiDto(MaquEqui maquEqui);
 
 	@Mapping(target = "pk.idBem", source = "idBem")
-	@Mapping(target = "pk.idTipoBem", source = "idTipoBem")
 	MaquEquiEntity toMaquEquiEntity(MaquEqui maquEqui);
 
 	default MaquEqui fromMaquEquiDto(MaquEquiDto maquEquiDto) {

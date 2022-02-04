@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import lombok.Setter;
 @Embeddable
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Getter
 @Setter
 public class MaquEquiEntityPK implements Serializable {
@@ -23,7 +25,7 @@ public class MaquEquiEntityPK implements Serializable {
 	private String idBem;
 
 	@Column(name = "COD_TIPO_BEM", nullable = false, updatable = false)
-	private int idTipoBem = 7;
+	private final int idTipoBem = 7;
 
 	@Override
 	public String toString() {
